@@ -1,6 +1,1 @@
 colorama
-requests
-slowhttptest (cliente)
-hping3 (cliente)
-nmap   (cliente)   
-hydra  (cliente)
