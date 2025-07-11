@@ -7,7 +7,7 @@
 
 ## Descripción
 
-Este proyecto implementa una pequeña botnet en Python, dividida en dos componentes:
+Este proyecto implementa una pequeña Botnet en Python, dividida en dos componentes:
 
 - **Servidor C2 (`src/Botnet.py`)**  
   Orquesta la red de bots, recibe conexiones de los clientes infectados, envía comandos y recopila resultados.  
