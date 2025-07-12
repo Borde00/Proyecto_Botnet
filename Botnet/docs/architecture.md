@@ -12,7 +12,7 @@ Este documento describe la estructura y el flujo de comunicación entre el **Ser
    - Ofrece un menú interactivo para enviar comandos de ataque y visualizar resultados.  
    - Agrupa y enseña los resultados recibidos según el tipo de ataque.
 
-2. **Cliente/Bot (`src/Client.py`)**  
+2. **Cliente/Bot (`src/Cliente.py`)**  
    - Se conecta en bucle al servidor C2 (`HOST:PORT`).  
    - Recibe comandos y, según la palabra clave, ejecuta uno de los módulos de ataque:  
      - **HYDRA**: fuerza bruta SSH (usa ficheros de usuarios/contraseñas enviados codificados en Base64).  
