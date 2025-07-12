@@ -45,10 +45,10 @@ Este documento describe la estructura y el flujo de comunicación entre el **Ser
       │                (p.ej. hydra…)             │
       │                                           │
       │                5. Recoger salida          │
-      │                y formatear                 │
+      │                y formatear                │
       │                                           │
       │◄──────────────────────────────────────────│
-      │   6. Almacenar resultado en `results[]`    │
+      │   6. Almacenar resultado en `results[]`   │
       │                                           │
       │ 7. Mostrar resultados al operador         │
       │                                           │
