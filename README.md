@@ -27,8 +27,7 @@ Botnet/
 │   ├── botnet.py       # Código del servidor C2
 │   └── client.py       # Código del cliente/bot
 ├── docs/
-│   └── architecture.md # Descripción de la arquitectura C2 ↔ cliente
-├── .gitignore          # Ficheros y carpetas a ignorar por Git
+│   └── architecture.md # Descripción de la arquitectura C2 ↔ clientes
 ├── README.md           
 ├── LICENSE             # Licencia MIT
 └── requirements.txt    # Dependencias Python
