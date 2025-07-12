@@ -16,6 +16,15 @@ Este proyecto implementa una pequeña Botnet en Python, dividida en dos componen
   Se conecta al servidor C2, espera órdenes, ejecuta ataques (hydra, slowloris, hping3, nmap…) y devuelve los resultados.
 
 > ⚠️ **Aviso legal**: Este código es solo para fines educativos y de investigación. Su uso contra sistemas sin autorización es ilegal y puede acarrear responsabilidades.
+>
+> ---
+
+> ⚙️ **Este proyecto es una base en constante evolución**  
+> Estoy iterando y ampliando funcionalidades con regularidad.  
+> 
+> 💡 Si tienes ideas, sugerencias o quieres usar este código  
+> en tus propios proyectos, ¡escríbeme!
+
 
 ---
 
@@ -31,3 +40,4 @@ Botnet/
 ├── README.md           
 ├── LICENSE             # Licencia MIT
 └── requirements.txt    # Dependencias Python
+
