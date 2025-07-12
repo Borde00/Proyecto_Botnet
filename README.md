@@ -19,10 +19,10 @@ Este proyecto implementa una pequeña Botnet en Python, dividida en dos componen
 >
 > ---
 
-> ⚙️ **Este proyecto es una base en constante evolución**  
+> **Este proyecto es una base en constante evolución**  
 > Estoy iterando y ampliando funcionalidades con regularidad.  
 > 
-> 💡 Si tienes ideas, sugerencias o quieres usar este código  
+> Si tienes ideas, sugerencias o quieres usar este código  
 > en tus propios proyectos, ¡escríbeme!
 
 
