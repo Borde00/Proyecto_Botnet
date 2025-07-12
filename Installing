@@ -1,4 +1,4 @@
-1. Configura las direcciones
+1. Configura las direcciones y crear dos archivos
 
 En botnet.py, ajusta:
 
@@ -10,6 +10,7 @@ En client.py, ajusta:
 C2_SERVER = 'TU_IP'
 C2_PORT   = 8888
 
+**Importante**: ambos archivos deben ubicarse en el mismo directorio desde el que ejecutes `Botnet.py` y llamarse exactamente `users.txt` y `passwords.txt`. Si faltan o se nombran de forma distinta, el programa fallará al intentar cargar los diccionarios. 
 2. Instala dependencias
 
 pip install -r requirements.txt
