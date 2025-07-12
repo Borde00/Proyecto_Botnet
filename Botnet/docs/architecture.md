@@ -27,8 +27,7 @@ Este documento describe la estructura y el flujo de comunicación entre el **Ser
 
 ```text
 +-----------+                                +-----------+
-|  C2 Server|                                |   Cliente |
-| (Botnet.py)|                              |(Client.py)|
+|  C2 Server|                                |   Cliente |   
 +-----------+                                +-----------+
       │                                           │
       │ 1. START → bind en HOST:PORT              │
