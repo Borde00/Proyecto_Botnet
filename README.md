@@ -183,7 +183,7 @@ El cliente se conecta automáticamente y se reconecta cada 5 segundos si pierde 
 > El vídeo debe grabarse en un **entorno de laboratorio controlado** (máquinas virtuales, red NAT aislada).
 
 <!-- Opción A: enlace directo -->
-[▶ Ver demostración en YouTube](https://www.youtube.com/watch?v=TU_VIDEO_ID)
+[▶ Ver demostración](https://drive.google.com/file/d/1OfFfWTlM5q9X8BStkDmny4EXZj2W5MNQ/view?usp=sharing)
 
 ---
 
