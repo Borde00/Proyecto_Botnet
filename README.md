@@ -9,7 +9,7 @@ Proyecto académico de laboratorio orientado al estudio práctico de arquitectur
 > Queda prohibido su uso contra sistemas, redes o servicios de terceros sin permiso explícito.
 > Cualquier uso ilícito es responsabilidad exclusiva de quien lo ejecute.
 
-***
+---
 
 ## Descripción
 
@@ -23,9 +23,9 @@ El objetivo principal es **aprender, experimentar y documentar** conceptos clave
 - Ejecución distribuida de módulos de ataque.
 - Diseño de laboratorios de ciberseguridad defensiva.
 
-***
+---
 
-## Módulos de ataque implementados
+## Módulos implementados
 
 | Módulo | Comando C2 | Herramienta | Descripción |
 |---|---|---|---|
@@ -34,7 +34,7 @@ El objetivo principal es **aprender, experimentar y documentar** conceptos clave
 | SYN Flood | `HPING3_SYN HOST PORT DURATION` | `hping3` | Flood de paquetes SYN con IP spoofing aleatorio |
 | Port Scan | `NMAP_SCAN HOST` | `nmap` | Escaneo de servicios en rango de puertos 64000–64300 |
 
-***
+---
 
 ## Arquitectura
 
@@ -58,11 +58,9 @@ El flujo de comunicación sigue el siguiente esquema:
       │──────────────────────────────────────────►│
       │                                           │
       │  4. Enviar comando de ataque              │
-      │     e.g. "HYDRA ssh ssh://HOST:22 ..."    │
       │──────────────────────────────────────────►│
       │                                           │
       │               5. Ejecutar módulo          │
-      │               (hydra / hping3 / nmap…)    │
       │                                           │
       │◄──────────────────────────────────────────│
       │  6. RESULT → results[]                    │
@@ -72,7 +70,7 @@ El flujo de comunicación sigue el siguiente esquema:
 
 Para el detalle completo del diseño, consulta [`architecture.md`](architecture.md).
 
-***
+---
 
 ## Tecnologías y dependencias
 
@@ -89,14 +87,14 @@ pip install -r requirements.txt
 
 ### Herramientas externas del sistema
 
-| Herramienta | Módulo que la usa | Instalación (Debian/Ubuntu) |
-|---|---|---|
-| `hydra` | SSH Brute Force | `sudo apt install hydra` |
-| `slowhttptest` | HTTP Flood | `sudo apt install slowhttptest` |
-| `hping3` | SYN Flood | `sudo apt install hping3` |
-| `nmap` | Port Scan | `sudo apt install nmap` |
+| Herramienta | Instalación (Debian/Ubuntu) |
+|---|---|
+| `hydra` | `sudo apt install hydra` |
+| `slowhttptest` | `sudo apt install slowhttptest` |
+| `hping3` | `sudo apt install hping3` |
+| `nmap` | `sudo apt install nmap` |
 
-***
+---
 
 ## Estructura del proyecto
 
@@ -107,11 +105,11 @@ Proyecto_Botnet/
 ├── architecture.md    # Diagrama y flujo de comunicación
 ├── README.md
 ├── LICENSE
-├── requirements.txt   # Dependencias Python
-└── Installing         # Notas de instalación adicionales
+├── requirements.txt
+└── Installing
 ```
 
-***
+---
 
 ## Instalación
 
@@ -140,20 +138,18 @@ sudo apt install hydra slowhttptest hping3 nmap -y
 
 ### 4. Ajustar la configuración
 
-Antes de ejecutar, edita las siguientes variables en cada script:
-
-**`Botnet.py`** — IP y puerto de escucha del servidor C2:
+**`Botnet.py`** — IP y puerto de escucha:
 ```python
 server.bind(('192.168.10.16', 8888))   # ← cambia por tu IP de laboratorio
 ```
 
-**`Cliente.py`** — IP y puerto del servidor C2 al que conectar:
+**`Cliente.py`** — IP y puerto del C2:
 ```python
-C2_SERVER = '192.168.56.11'            # ← IP del servidor C2
+C2_SERVER = '192.168.56.11'
 C2_PORT   = 8888
 ```
 
-***
+---
 
 ## Uso
 
@@ -163,24 +159,13 @@ C2_PORT   = 8888
 python3 Botnet.py
 ```
 
-El servidor quedará a la escucha en el puerto `8888` mostrando el menú interactivo:
-
-```
-Menu Principal
-1. Listar bots conectados
-2. Iniciar ataque
-3. Salir
-```
-
 ### Conectar un cliente/bot
-
-En cada máquina bot (o VM de laboratorio), ejecuta:
 
 ```bash
 python3 Cliente.py
 ```
 
-El cliente se conecta automáticamente al C2 y se reconecta cada 5 segundos si pierde la conexión.
+El cliente se conecta automáticamente y se reconecta cada 5 segundos si pierde la conexión.
 
 ### Flujo de ataque
 
@@ -188,92 +173,19 @@ El cliente se conecta automáticamente al C2 y se reconecta cada 5 segundos si p
 2. Elige el tipo de ataque (1–4).
 3. Introduce los parámetros solicitados (IP objetivo, puerto, duración, etc.).
 4. El servidor envía el comando a todos los bots activos.
-5. Los resultados se muestran automáticamente en consola una vez finalizado el ataque.
+5. Los resultados se muestran en consola una vez finalizado el ataque.
 
-***
+---
 
 ## Demostración
 
 > [!NOTE]
-> El vídeo debe grabarse en un **entorno de laboratorio controlado** (máquinas virtuales, red NAT aislada). No grabes nunca contra sistemas reales ni ajenos.
-
-### Vídeo de demostración
+> El vídeo debe grabarse en un **entorno de laboratorio controlado** (máquinas virtuales, red NAT aislada).
 
 <!-- Opción A: enlace directo -->
 [▶ Ver demostración en YouTube](https://www.youtube.com/watch?v=TU_VIDEO_ID)
 
-<!-- Opción B: miniatura clicable (reemplaza TU_VIDEO_ID) -->
-<!--
-[
--->
-
-### Contenido del vídeo recomendado
-
-| # | Sección | Duración aprox. |
-|---|---|---|
-| 1 | Presentación del proyecto y contexto educativo | ~1 min |
-| 2 | Explicación de la arquitectura C2 ↔ Cliente | ~2 min |
-| 3 | Configuración del entorno de laboratorio (VMs, red NAT) | ~2 min |
-| 4 | Arranque del servidor C2 (`Botnet.py`) y conexión del bot | ~1 min |
-| 5 | Demostración de cada módulo: HYDRA, SLOWLORIS, HPING3, NMAP | ~5 min |
-| 6 | Visualización de resultados en el servidor | ~1 min |
-| 7 | Cierre con advertencia ética y legal | ~30 s |
-
-### Cómo subir el vídeo
-
-**YouTube (recomendado)**
-
-1. Sube el vídeo como **no listado** (`Unlisted`) si es para uso académico/privado, o **público** si quieres compartirlo abiertamente.
-2. Añade en la descripción del vídeo el aviso ético del proyecto.
-3. Copia la URL del vídeo y reemplaza `TU_VIDEO_ID` en este README.
-4. Si usas la miniatura clicable (Opción B), descomenta ese bloque y comenta el de Opción A.
-
-**Asciinema (alternativa para terminal)**
-
-Si prefieres una grabación ligera solo de consola, puedes usar [asciinema](https://asciinema.org/):
-
-```bash
-# Instalar
-sudo apt install asciinema
-
-# Grabar sesión
-asciinema rec demo.cast
-
-# Subir (requiere cuenta en asciinema.org)
-asciinema upload demo.cast
-```
-
-Luego incrusta el player con:
-
-```md
-[![asciicast](https://asciinema.org/a/TU_CAST_ID.svg)](https://asciinema.org/a/TU_CAST_ID)
-```
-
-***
-
-## Entorno recomendado
-
-Para un uso responsable y seguro, se recomienda ejecutar este proyecto en:
-
-- Red privada o NAT de laboratorio aislada de Internet.
-- Máquinas virtuales (VirtualBox, VMware, Proxmox) o contenedores Docker.
-- Sistemas operativos de pruebas bajo tu propio control.
-- Kali Linux como SO base para disponer de las herramientas externas preinstaladas.
-
-***
-
-## Posibles mejoras
-
-- [ ] Refactorizar en estructura `src/` y `docs/`.
-- [ ] Separar configuración en `.env` o `config.py`.
-- [ ] Añadir cifrado del canal de comunicación (TLS/SSL).
-- [ ] Implementar autenticación entre servidor y clientes.
-- [ ] Registrar eventos con el módulo `logging`.
-- [ ] Añadir pruebas unitarias por módulo de ataque.
-- [ ] Soporte para comandos en paralelo a múltiples bots simultáneamente.
-- [ ] Dashboard web de gestión de bots.
-
-***
+---
 
 ## Aviso ético y legal
 
@@ -281,13 +193,13 @@ Este repositorio se comparte únicamente con fines educativos y de investigació
 
 El autor no promueve el uso indebido de este software ni su despliegue fuera de entornos controlados y autorizados. El uso no autorizado contra infraestructuras ajenas puede constituir un delito tipificado en el artículo 197 bis y siguientes del Código Penal español, así como en legislaciones equivalentes de otros países.
 
-***
+---
 
 ## Licencia
 
 Distribuido bajo licencia **MIT**. Consulta el archivo [`LICENSE`](LICENSE) para más información.
 
-***
+---
 
 ## Autor
 
