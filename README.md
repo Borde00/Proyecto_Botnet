@@ -9,7 +9,7 @@ Proyecto académico de laboratorio orientado al estudio práctico de arquitectur
 > Queda prohibido su uso contra sistemas, redes o servicios de terceros sin permiso explícito.
 > Cualquier uso ilícito es responsabilidad exclusiva de quien lo ejecute.
 
----
+***
 
 ## Descripción
 
@@ -23,7 +23,7 @@ El objetivo principal es **aprender, experimentar y documentar** conceptos clave
 - Ejecución distribuida de módulos de ataque.
 - Diseño de laboratorios de ciberseguridad defensiva.
 
----
+***
 
 ## Módulos de ataque implementados
 
@@ -34,7 +34,7 @@ El objetivo principal es **aprender, experimentar y documentar** conceptos clave
 | SYN Flood | `HPING3_SYN HOST PORT DURATION` | `hping3` | Flood de paquetes SYN con IP spoofing aleatorio |
 | Port Scan | `NMAP_SCAN HOST` | `nmap` | Escaneo de servicios en rango de puertos 64000–64300 |
 
----
+***
 
 ## Arquitectura
 
@@ -72,7 +72,7 @@ El flujo de comunicación sigue el siguiente esquema:
 
 Para el detalle completo del diseño, consulta [`architecture.md`](architecture.md).
 
----
+***
 
 ## Tecnologías y dependencias
 
@@ -96,7 +96,7 @@ pip install -r requirements.txt
 | `hping3` | SYN Flood | `sudo apt install hping3` |
 | `nmap` | Port Scan | `sudo apt install nmap` |
 
----
+***
 
 ## Estructura del proyecto
 
@@ -111,7 +111,7 @@ Proyecto_Botnet/
 └── Installing         # Notas de instalación adicionales
 ```
 
----
+***
 
 ## Instalación
 
@@ -153,7 +153,7 @@ C2_SERVER = '192.168.56.11'            # ← IP del servidor C2
 C2_PORT   = 8888
 ```
 
----
+***
 
 ## Uso
 
@@ -190,7 +190,7 @@ El cliente se conecta automáticamente al C2 y se reconecta cada 5 segundos si p
 4. El servidor envía el comando a todos los bots activos.
 5. Los resultados se muestran automáticamente en consola una vez finalizado el ataque.
 
----
+***
 
 ## Demostración
 
@@ -204,7 +204,7 @@ El cliente se conecta automáticamente al C2 y se reconecta cada 5 segundos si p
 
 <!-- Opción B: miniatura clicable (reemplaza TU_VIDEO_ID) -->
 <!--
-[![Demostración Proyecto_Botnet](https://img.youtube.com/vi/TU_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=TU_VIDEO_ID)
+[
 -->
 
 ### Contenido del vídeo recomendado
@@ -249,7 +249,7 @@ Luego incrusta el player con:
 [![asciicast](https://asciinema.org/a/TU_CAST_ID.svg)](https://asciinema.org/a/TU_CAST_ID)
 ```
 
----
+***
 
 ## Entorno recomendado
 
@@ -260,7 +260,7 @@ Para un uso responsable y seguro, se recomienda ejecutar este proyecto en:
 - Sistemas operativos de pruebas bajo tu propio control.
 - Kali Linux como SO base para disponer de las herramientas externas preinstaladas.
 
----
+***
 
 ## Posibles mejoras
 
@@ -273,7 +273,7 @@ Para un uso responsable y seguro, se recomienda ejecutar este proyecto en:
 - [ ] Soporte para comandos en paralelo a múltiples bots simultáneamente.
 - [ ] Dashboard web de gestión de bots.
 
----
+***
 
 ## Aviso ético y legal
 
@@ -281,13 +281,13 @@ Este repositorio se comparte únicamente con fines educativos y de investigació
 
 El autor no promueve el uso indebido de este software ni su despliegue fuera de entornos controlados y autorizados. El uso no autorizado contra infraestructuras ajenas puede constituir un delito tipificado en el artículo 197 bis y siguientes del Código Penal español, así como en legislaciones equivalentes de otros países.
 
----
+***
 
 ## Licencia
 
 Distribuido bajo licencia **MIT**. Consulta el archivo [`LICENSE`](LICENSE) para más información.
 
----
+***
 
 ## Autor
 
