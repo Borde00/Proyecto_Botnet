@@ -1,68 +1,100 @@
 # Proyecto_Botnet
 
-Proyecto académico y de laboratorio orientado al estudio de arquitecturas C2, automatización de clientes remotos y análisis de ejecución distribuida en entornos controlados.
+Proyecto académico de laboratorio orientado al estudio práctico de arquitecturas C2 (Command & Control), comunicación distribuida cliente-servidor y análisis de técnicas de ataque en entornos controlados.
 
 > [!WARNING]
 > **Este proyecto ha sido desarrollado exclusivamente con fines educativos, formativos y de investigación en ciberseguridad.**
->  
-> Su uso debe limitarse a laboratorios aislados, máquinas virtuales propias o entornos donde exista autorización expresa.  
-> No debe utilizarse contra sistemas, redes o servicios de terceros sin permiso.
+>
+> Su uso debe limitarse estrictamente a laboratorios aislados, máquinas virtuales propias o entornos con autorización expresa.
+> Queda prohibido su uso contra sistemas, redes o servicios de terceros sin permiso explícito.
+> Cualquier uso ilícito es responsabilidad exclusiva de quien lo ejecute.
 
 ---
 
 ## Descripción
 
-Este proyecto implementa una arquitectura cliente-servidor en Python inspirada en un modelo C2 (Command and Control) para prácticas de laboratorio, pruebas controladas y análisis de comunicación remota entre nodos.
+Este proyecto implementa en Python una arquitectura C2 funcional compuesta por un **servidor centralizado** (`Botnet.py`) y un **cliente/bot** (`Cliente.py`) que se conecta a él de forma persistente. El operador gestiona los bots desde un menú interactivo en consola, enviando comandos de ataque y recibiendo los resultados en tiempo real.
 
-El sistema se compone de:
+El objetivo principal es **aprender, experimentar y documentar** conceptos clave de:
 
-- Un **servidor C2** que recibe conexiones, mantiene una lista de clientes activos y centraliza el envío de órdenes.
-- Un **cliente** que se conecta al servidor, recibe instrucciones y devuelve resultados.
-- Un documento de **arquitectura** que explica el flujo de comunicación entre ambos componentes.
-
-El objetivo principal del proyecto es **aprender**, **experimentar** y **documentar** conceptos relacionados con:
-- Comunicación socket TCP.
-- Coordinación de clientes remotos.
-- Automatización de tareas desde un nodo central.
-- Gestión de resultados y ejecución distribuida.
-- Diseño de laboratorios defensivos y de investigación.
+- Comunicación TCP mediante sockets.
+- Coordinación y gestión de clientes remotos.
+- Transferencia de ficheros codificados en Base64.
+- Ejecución distribuida de módulos de ataque.
+- Diseño de laboratorios de ciberseguridad defensiva.
 
 ---
 
-## Objetivos del proyecto
+## Módulos de ataque implementados
 
-- Comprender cómo funciona una arquitectura C2 a nivel técnico.
-- Practicar programación en Python orientada a redes y automatización.
-- Simular escenarios de laboratorio para formación en ciberseguridad.
-- Documentar el flujo entre servidor y clientes de forma clara.
-- Servir como base para futuras mejoras, refactorización y hardening del código.
+| Módulo | Comando C2 | Herramienta | Descripción |
+|---|---|---|---|
+| SSH Brute Force | `HYDRA ssh ssh://HOST:PORT users.txt pass.txt` | `hydra` | Fuerza bruta SSH con listas de credenciales enviadas en Base64 |
+| HTTP Flood | `SLOWLORIS HOST PORT DURATION` | `slowhttptest` | Ataque Slowloris con verificación de disponibilidad HTTP |
+| SYN Flood | `HPING3_SYN HOST PORT DURATION` | `hping3` | Flood de paquetes SYN con IP spoofing aleatorio |
+| Port Scan | `NMAP_SCAN HOST` | `nmap` | Escaneo de servicios en rango de puertos 64000–64300 |
 
 ---
 
 ## Arquitectura
 
-A alto nivel, el flujo es el siguiente:
+El flujo de comunicación sigue el siguiente esquema:
 
-1. El servidor C2 queda a la escucha en una IP y un puerto definidos.
-2. Los clientes se conectan al servidor de forma remota.
-3. El operador central gestiona los clientes conectados desde un menú.
-4. El servidor envía órdenes a los clientes.
-5. Los clientes ejecutan la lógica correspondiente y devuelven los resultados.
-6. El servidor recibe, agrupa y muestra la salida al operador.
+```text
++-----------+                                +-----------+
+|  C2 Server|                                |  Cliente  |
++-----------+                                +-----------+
+      │                                           │
+      │  1. bind en HOST:PORT (8888)              │
+      │──────────────────────────────────────────►│
+      │                                           │
+      │  2. ACCEPT conexión del bot               │
+      │◄──────────────────────────────────────────│
+      │  socket_bot ∈ bots[]                      │
+      │                                           │
+      │  3. [HYDRA] SEND_FILE users.txt <b64>     │
+      │──────────────────────────────────────────►│
+      │  3. [HYDRA] SEND_FILE password.txt <b64>  │
+      │──────────────────────────────────────────►│
+      │                                           │
+      │  4. Enviar comando de ataque              │
+      │     e.g. "HYDRA ssh ssh://HOST:22 ..."    │
+      │──────────────────────────────────────────►│
+      │                                           │
+      │               5. Ejecutar módulo          │
+      │               (hydra / hping3 / nmap…)    │
+      │                                           │
+      │◄──────────────────────────────────────────│
+      │  6. RESULT → results[]                    │
+      │                                           │
+      │  7. Mostrar resultados al operador        │
+```
 
-Para una explicación más detallada del diseño, consulta el archivo:
-
-- `architecture.md`
+Para el detalle completo del diseño, consulta [`architecture.md`](architecture.md).
 
 ---
 
-## Tecnologías utilizadas
+## Tecnologías y dependencias
 
-- **Python 3**
-- **Sockets TCP**
-- **Threading**
-- **Colorama**
-- Integración experimental con herramientas externas del sistema para laboratorio y análisis técnico
+### Python (pip)
+
+```bash
+pip install -r requirements.txt
+```
+
+| Paquete | Uso |
+|---|---|
+| `colorama` | Colores en consola (banner, menú, resultados) |
+| `requests` | Verificación de disponibilidad HTTP tras Slowloris |
+
+### Herramientas externas del sistema
+
+| Herramienta | Módulo que la usa | Instalación (Debian/Ubuntu) |
+|---|---|---|
+| `hydra` | SSH Brute Force | `sudo apt install hydra` |
+| `slowhttptest` | HTTP Flood | `sudo apt install slowhttptest` |
+| `hping3` | SYN Flood | `sudo apt install hping3` |
+| `nmap` | Port Scan | `sudo apt install nmap` |
 
 ---
 
@@ -70,26 +102,14 @@ Para una explicación más detallada del diseño, consulta el archivo:
 
 ```text
 Proyecto_Botnet/
-├── Botnet.py          # Servidor C2
-├── Cliente.py         # Cliente remoto
-├── architecture.md    # Documento de arquitectura
+├── Botnet.py          # Servidor C2 — menú interactivo y gestión de bots
+├── Cliente.py         # Cliente/Bot — ejecuta módulos de ataque
+├── architecture.md    # Diagrama y flujo de comunicación
 ├── README.md
 ├── LICENSE
-├── requirements.txt
-└── Installing         # Notas de instalación
+├── requirements.txt   # Dependencias Python
+└── Installing         # Notas de instalación adicionales
 ```
-
----
-
-## Entorno recomendado
-
-Para utilizar este proyecto de forma responsable, se recomienda:
-
-- Un laboratorio aislado.
-- Máquinas virtuales o equipos de pruebas.
-- Red privada o NAT de laboratorio.
-- Sistemas bajo tu control o con autorización.
-- Entorno de análisis sin exposición pública.
 
 ---
 
@@ -102,79 +122,111 @@ git clone <URL_DEL_REPOSITORIO>
 cd Proyecto_Botnet
 ```
 
-### 2. Crear un entorno virtual
+### 2. Crear entorno virtual e instalar dependencias Python
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### 3. Instalar dependencias
-
-```bash
+source .venv/bin/activate   # Linux/macOS
+# .venv\Scripts\activate    # Windows
 pip install -r requirements.txt
 ```
 
-### 4. Revisar configuración
+### 3. Instalar dependencias del sistema
 
-Antes de ejecutar cualquier prueba, revisa y adapta:
-- La IP del servidor.
-- El puerto de escucha.
-- Los nombres y rutas de los archivos auxiliares.
-- Las dependencias externas necesarias para el entorno de laboratorio.
+```bash
+sudo apt update
+sudo apt install hydra slowhttptest hping3 nmap -y
+```
 
----
+### 4. Ajustar la configuración
 
-## Funcionamiento general
+Antes de ejecutar, edita las siguientes variables en cada script:
 
-El proyecto sigue una lógica simple:
+**`Botnet.py`** — IP y puerto de escucha del servidor C2:
+```python
+server.bind(('192.168.10.16', 8888))   # ← cambia por tu IP de laboratorio
+```
 
-- El **servidor** recibe conexiones entrantes y administra clientes activos.
-- El **cliente** establece conexión con el servidor y espera instrucciones.
-- Los resultados se devuelven al servidor y se presentan desde consola.
-
-Este repositorio debe entenderse como una **base educativa** para estudiar:
-- Diseño de herramientas distribuidas.
-- Comunicación cliente-servidor.
-- Automatización y orquestación.
-- Refactorización y mejora segura de código.
+**`Cliente.py`** — IP y puerto del servidor C2 al que conectar:
+```python
+C2_SERVER = '192.168.56.11'            # ← IP del servidor C2
+C2_PORT   = 8888
+```
 
 ---
 
-## Vídeo de demostración
+## Uso
 
-### Video
+### Iniciar el servidor C2
 
-[Ver vídeo de funcionamiento](https://www.youtube.com/watch?v=TU_VIDEO_ID)
+```bash
+python3 Botnet.py
+```
+
+El servidor quedará a la escucha en el puerto `8888` mostrando el menú interactivo:
+
+```
+Menu Principal
+1. Listar bots conectados
+2. Iniciar ataque
+3. Salir
+```
+
+### Conectar un cliente/bot
+
+En cada máquina bot (o VM de laboratorio), ejecuta:
+
+```bash
+python3 Cliente.py
+```
+
+El cliente se conecta automáticamente al C2 y se reconecta cada 5 segundos si pierde la conexión.
+
+### Flujo de ataque
+
+1. Selecciona **opción 2** en el menú del servidor.
+2. Elige el tipo de ataque (1–4).
+3. Introduce los parámetros solicitados (IP objetivo, puerto, duración, etc.).
+4. El servidor envía el comando a todos los bots activos.
+5. Los resultados se muestran automáticamente en consola una vez finalizado el ataque.
+
+---
+
+## Entorno recomendado
+
+Para un uso responsable y seguro, se recomienda ejecutar este proyecto en:
+
+- Red privada o NAT de laboratorio aislada de Internet.
+- Máquinas virtuales (VirtualBox, VMware, Proxmox) o contenedores Docker.
+- Sistemas operativos de pruebas bajo tu propio control.
+- Kali Linux como SO base para disponer de las herramientas externas preinstaladas.
 
 ---
 
 ## Posibles mejoras
 
-- Refactorizar la estructura del proyecto en carpetas `src/` y `docs/`.
-- Mejorar validaciones y manejo de errores.
-- Añadir registro de eventos (`logging`).
-- Separar configuración en un archivo `.env` o `config.py`.
-- Incluir pruebas unitarias.
-- Documentar mejor los módulos.
-- Añadir hardening del canal de comunicación.
-- Mejorar la trazabilidad de resultados.
+- [ ] Refactorizar en estructura `src/` y `docs/`.
+- [ ] Separar configuración en `.env` o `config.py`.
+- [ ] Añadir cifrado del canal de comunicación (TLS/SSL).
+- [ ] Implementar autenticación entre servidor y clientes.
+- [ ] Registrar eventos con el módulo `logging`.
+- [ ] Añadir pruebas unitarias por módulo de ataque.
+- [ ] Soporte para comandos en paralelo a múltiples bots simultáneamente.
+- [ ] Dashboard web de gestión de bots.
 
 ---
 
 ## Aviso ético y legal
 
-Este repositorio se comparte únicamente con fines educativos y de investigación.
+Este repositorio se comparte únicamente con fines educativos y de investigación en ciberseguridad.
 
-El autor no promueve el uso indebido del software ni su despliegue fuera de entornos controlados.  
-Cualquier uso no autorizado contra infraestructuras ajenas puede ser ilegal y es responsabilidad exclusiva de quien lo ejecute.
+El autor no promueve el uso indebido de este software ni su despliegue fuera de entornos controlados y autorizados. El uso no autorizado contra infraestructuras ajenas puede constituir un delito tipificado en el artículo 197 bis y siguientes del Código Penal español, así como en legislaciones equivalentes de otros países.
 
 ---
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia MIT.  
-Consulta el archivo `LICENSE` para más información.
+Distribuido bajo licencia **MIT**. Consulta el archivo [`LICENSE`](LICENSE) para más información.
 
 ---
 
@@ -182,4 +234,4 @@ Consulta el archivo `LICENSE` para más información.
 
 **Borde00**
 
-Proyecto en evolución, creado como práctica de aprendizaje, documentación técnica y experimentación en laboratorio.
+Proyecto en evolución, creado como práctica de aprendizaje, documentación técnica y experimentación en entornos de laboratorio de ciberseguridad.
