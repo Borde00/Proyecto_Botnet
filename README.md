@@ -127,6 +127,7 @@ cd Proyecto_Botnet
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate   # Linux/macOS
+# .venv\Scripts\activate    # Windows
 pip install -r requirements.txt
 ```
 
@@ -188,6 +189,65 @@ El cliente se conecta automáticamente al C2 y se reconecta cada 5 segundos si p
 3. Introduce los parámetros solicitados (IP objetivo, puerto, duración, etc.).
 4. El servidor envía el comando a todos los bots activos.
 5. Los resultados se muestran automáticamente en consola una vez finalizado el ataque.
+
+---
+
+## Demostración
+
+> [!NOTE]
+> El vídeo debe grabarse en un **entorno de laboratorio controlado** (máquinas virtuales, red NAT aislada). No grabes nunca contra sistemas reales ni ajenos.
+
+### Vídeo de demostración
+
+<!-- Opción A: enlace directo -->
+[▶ Ver demostración en YouTube](https://www.youtube.com/watch?v=TU_VIDEO_ID)
+
+<!-- Opción B: miniatura clicable (reemplaza TU_VIDEO_ID) -->
+<!--
+[![Demostración Proyecto_Botnet](https://img.youtube.com/vi/TU_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=TU_VIDEO_ID)
+-->
+
+### Contenido del vídeo recomendado
+
+| # | Sección | Duración aprox. |
+|---|---|---|
+| 1 | Presentación del proyecto y contexto educativo | ~1 min |
+| 2 | Explicación de la arquitectura C2 ↔ Cliente | ~2 min |
+| 3 | Configuración del entorno de laboratorio (VMs, red NAT) | ~2 min |
+| 4 | Arranque del servidor C2 (`Botnet.py`) y conexión del bot | ~1 min |
+| 5 | Demostración de cada módulo: HYDRA, SLOWLORIS, HPING3, NMAP | ~5 min |
+| 6 | Visualización de resultados en el servidor | ~1 min |
+| 7 | Cierre con advertencia ética y legal | ~30 s |
+
+### Cómo subir el vídeo
+
+**YouTube (recomendado)**
+
+1. Sube el vídeo como **no listado** (`Unlisted`) si es para uso académico/privado, o **público** si quieres compartirlo abiertamente.
+2. Añade en la descripción del vídeo el aviso ético del proyecto.
+3. Copia la URL del vídeo y reemplaza `TU_VIDEO_ID` en este README.
+4. Si usas la miniatura clicable (Opción B), descomenta ese bloque y comenta el de Opción A.
+
+**Asciinema (alternativa para terminal)**
+
+Si prefieres una grabación ligera solo de consola, puedes usar [asciinema](https://asciinema.org/):
+
+```bash
+# Instalar
+sudo apt install asciinema
+
+# Grabar sesión
+asciinema rec demo.cast
+
+# Subir (requiere cuenta en asciinema.org)
+asciinema upload demo.cast
+```
+
+Luego incrusta el player con:
+
+```md
+[![asciicast](https://asciinema.org/a/TU_CAST_ID.svg)](https://asciinema.org/a/TU_CAST_ID)
+```
 
 ---
 
