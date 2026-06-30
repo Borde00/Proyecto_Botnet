@@ -109,12 +109,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-En Windows:
-
-```powershell
-.venv\Scripts\activate
-```
-
 ### 3. Instalar dependencias
 
 ```bash
@@ -149,34 +143,9 @@ Este repositorio debe entenderse como una **base educativa** para estudiar:
 
 ## Vídeo de demostración
 
-Puedes añadir aquí un vídeo mostrando el funcionamiento del proyecto en un **entorno de laboratorio controlado**.
-
-### Opción 1: enlace directo
-
-```md
-## Vídeo de demostración
+### Video
 
 [Ver vídeo de funcionamiento](https://www.youtube.com/watch?v=TU_VIDEO_ID)
-```
-
-### Opción 2: miniatura clicable de YouTube
-
-```md
-## Vídeo de demostración
-
-[
-```
-
-### Qué enseñar en el vídeo
-
-Te recomiendo que el vídeo muestre:
-
-- Presentación breve del objetivo del proyecto.
-- Explicación de la arquitectura C2 ↔ cliente.
-- Configuración del entorno de laboratorio.
-- Ejecución controlada del servidor y del cliente.
-- Visualización de la recepción de resultados.
-- Cierre con advertencia ética y legal.
 
 ---
 
